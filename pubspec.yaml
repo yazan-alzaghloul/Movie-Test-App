@@ -1,0 +1,49 @@
+name: movie_test_app
+description: A new Flutter project.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.17.6 <3.0.0"
+
+
+## Slidy Scripts
+vars:
+  clean: flutter clean
+  get: flutter pub get
+  runner: flutter pub run build_runner
+  codegenLoader: flutter pub run easy_localization:generate -S assets/translations -f json
+
+scripts:
+  mobx_build_clean: $clean & $get & $runner build --delete-conflicting-outputs
+  buildDevelopmentApk: $clean & flutter build apk --split-per-abi --flavor development -t lib/main.dart --obfuscate --split-debug-info=./abu_dhabi_art/debug
+  buildDevelopmentAab: $clean & flutter build appbundle --flavor development -t lib/main.dart --obfuscate --split-debug-info=./abu_dhabi_art/debug
+  buildDevelopmentIos: $clean & flutter build ios --flavor development -t lib/main.dart --obfuscate --split-debug-info=./abu_dhabi_art/debug
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  dio: ^4.0.6
+  flutter_modular: ^5.0.3
+  mobx: ^2.0.7+5
+  flutter_mobx: ^2.0.6+1
+  flutter_svg: ^1.1.0
+  flutter_dotenv: ^5.0.2
+  fluttertoast: ^8.0.9
+  flutter_spinkit: ^5.1.0
+  photo_view: ^0.13.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  build_runner: ^2.2.0
+  mobx_codegen: ^2.0.7
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - .env
